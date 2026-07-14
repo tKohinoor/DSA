@@ -1,0 +1,76 @@
+import java.util.List;
+import java.util.ArrayList;
+
+
+class TreeNode {
+	int data;
+	TreeNode left;
+	TreeNode right;
+
+	public TreeNode(int data) {
+		this.data = data;
+		left = null;
+		right = null;
+	}
+}
+
+public class Main {
+	//PreOrder Traversal
+	public List<Integer> preOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		helperPreOrder(root, result);
+		return result;
+	}
+	public void helperPreOrder(TreeNode root, List<Integer> result) {
+		if(root==null) return;
+		result.add(root.data);
+		helperPreOrder(root.left, result);
+		helperPreOrder(root.right, result);
+	}
+
+	//InOrder Traversal
+	public List<Integer> inOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		helperInOrder(root, result);
+		return result;
+	}
+	public void helperInOrder(TreeNode root, List<Integer> result) {
+		if(root==null) return;
+		helperInOrder(root.left, result);
+		result.add(root.data);
+		helperInOrder(root.right, result);
+	}
+
+	//PostOrder Traversal
+	public List<Integer> postOrder(TreeNode root) {
+		List<Integer> result = new ArrayList<>();
+		helperPostOrder(root, result);
+		return result;
+	}
+	public void helperPostOrder(TreeNode root, List<Integer> result) {
+		if(root==null) return;
+		helperPostOrder(root.left, result);
+		helperPostOrder(root.right, result);
+		result.add(root.data);
+	}
+
+	public static void main(String[] args) {
+		TreeNode root = new TreeNode(1);
+
+		root.left = new TreeNode(2);
+		root.right = new TreeNode(3);
+
+		root.left.left = new TreeNode(4);
+		root.left.right = new TreeNode(5);
+		root.right.left = new TreeNode(6);
+		root.right.right = new TreeNode(7);
+
+		Main m = new Main();
+		List<Integer> ans1 = m.preOrder(root);
+		System.out.println(ans1);
+		List<Integer> ans2 = m.inOrder(root);
+		System.out.println(ans2);
+		List<Integer> ans3 = m.postOrder(root);
+		System.out.println(ans3);
+	}
+}
