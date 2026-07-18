@@ -5,16 +5,27 @@
 #         self.left = left
 #         self.right = right
 class Solution(object):
+    def preOrderTraversal(self, root):
+        res = []
+
+        def preOrder(node):
+            if node is None:
+                res.append(None)
+                return
+            res.append(node.val)
+            preOrder(node.left)
+            preOrder(node.right)
+        preOrder(root)
+        return res
+
     def isSameTree(self, p, q):
         """
         :type p: Optional[TreeNode]
         :type q: Optional[TreeNode]
         :rtype: bool
         """
-        if p is None and q is None:
+        a = self.preOrderTraversal(p)
+        b = self.preOrderTraversal(q)
+        if a==b:
             return True
-        if p is None or q is None:
-            return False
-        if p.val != q.val:
-            return False
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        return False
